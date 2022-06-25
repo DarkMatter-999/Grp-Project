@@ -39,6 +39,8 @@ def doesnt_exist():
 
     print("Table created successfully........")
 
+    
+
 
     # Commit your changes in the database
     conn.commit()
@@ -46,7 +48,13 @@ def doesnt_exist():
     #Closing the connection
     conn.close()
 
-
+ #Inserting values function
+def insdata(DID,UID,IMG,TITLE,CONTENT,TIMESTAMP):
+        sql=f'''INSERT INTO DATA VALUES({DID},{UID},{IMG},{TITLE},{CONTENT},{TIMESTAMP})'''
+        cursor.execute(sql)
+def inscities(CITY,ADDRESS,TYPE):
+        sql=f'''INSERT INTO CITIES VALUES({CITY},{ADDRESS},{TYPE})'''
+        cursor.execute(sql)
 
 if not exists("database.db"):
     doesnt_exist()
