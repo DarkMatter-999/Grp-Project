@@ -50,40 +50,26 @@ def doesnt_exist():
     conn.close()
 
 #Inserting values function
-def insuser(USERNAME, PHNO, PASSWD, UEMAIL):
+def insuser(conn, USERNAME, PHNO, PASSWD, UEMAIL):
     UID = generate_random(32)
-
-    conn = sqlite3.connect('database.db')
-
     cursor = conn.cursor()
-
     sql=f'''INSERT INTO USERS VALUES("{UID}","{USERNAME}","{PHNO}","{PASSWD}","{UEMAIL}")'''
     cursor.execute(sql)
     conn.commit()
-    conn.close()
 
-def insdata(UID,IMG,TITLE,CONTENT,TIMESTAMP, CITY):
+def insdata(conn, UID,IMG,TITLE,CONTENT,TIMESTAMP, CITY):
     DID = generate_random(32)
-    conn = sqlite3.connect('database.db')
-
     cursor = conn.cursor()
-
     sql=f'''INSERT INTO DATA VALUES("{DID}","{UID}","{IMG}","{TITLE}","{CONTENT}","{TIMESTAMP}","{CITY}")'''
     cursor.execute(sql)
     conn.commit()
-    conn.close()
 
-def inscity(CITY,ADDRESS,TYPE):
-    conn = sqlite3.connect('database.db')
-
+def inscity(conn, CITY,ADDRESS,TYPE):
     cursor = conn.cursor()
-
-
     sql=f'''INSERT INTO CITIES VALUES("{CITY}","{ADDRESS}","{TYPE}")'''
     print(sql)
     cursor.execute(sql)
     conn.commit()
-    conn.close()
 
 if __name__ == '__main__':
     if not exists("database.db"):
