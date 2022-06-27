@@ -14,7 +14,6 @@
 .container {
     max-width: 1280px;
     margin: 0 auto;
-
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -26,7 +25,7 @@ nav{
     left: 0;
     right: 0;
     z-index: 99;
-    background-color:var(--dark) ;
+    background:linear-gradient(to right,#00093c,#2d0b00);
     padding: 16px 32px;
     border-bottom: 3px solid var(--primary);
 }
@@ -38,6 +37,9 @@ h1 {
     text-transform: uppercase;
 }
 
+.menu-bg {
+
+}
 
 .hamburger{
     display: block;
@@ -112,6 +114,10 @@ h1 {
 .menu a.is-active , .menu a:hover{
     background-color: var(--primary);
 }
+.menu a.is-active:hover {
+    background-color: var(--light);
+    color: var(--dark);
+}
 
 .hmenu {
 	position: fixed;
@@ -151,9 +157,10 @@ h1 {
 }
 
 .outercontainer {
-    position: fixed;
+    position: relative;
 	top: 20%;
 	width: 100%;
+    padding: 20em 0;
 	display: block;
     text-align: left;
 	transition: 0.4s;
@@ -168,37 +175,42 @@ h1 {
     margin: 20 0 0 450px;  
     padding: 60px;   
     border-radius: 15px;
-    color: #Bc38ff;
+    color: #ffffff;
     background-color: #12002F;
 }
 .outercontainer label {
-    padding-left: 20px;
+    padding-left: 10px;
 }
 .outercontainer button {
-    align-self: center;
     background-color: #24104f;
     border-radius: 99px;
     border-style: none;
     padding: 12px 16px;
     color: #FFF;
     font-weight: 600;
+    margin-top: 10px;
+    margin-left: 10px;
 }
 
 input[type="email"],[type="password"],[type="text"] {
     padding: 10px;
     outline: none;
     border-radius: 20px;
-    border: 1px solid #2d9fd9;
-    color: #a0d18c;
+    border: 1px solid #9a2dd9;
+    background-color: var(--dark);
+    color: #ffffff;
     width: 250px;
     height: 35px;
 }
 
+input:focus {
+    box-shadow: 0 0 10px #9a2dd9;
+}
 
 footer{
     width: 100%;
-    /* height: 10%; */
-    position:absolute;
+    height: 10%;
+    position: relative;
     bottom: 0;
     background:linear-gradient(to right,#00093c,#2d0b00);
     color: #fff;
@@ -324,6 +336,11 @@ hr{
     left: 10px;
     animation: moving 2s linear infinite;
 }
+
+.outline {
+    height: 100%;
+}
+
 @keyframes moving{
     0%{
         left: -20px;

@@ -21,10 +21,8 @@ def register():
 @app.route("/login", methods = ['POST', 'GET'])
 def login():
     if request.method == "POST":
-        user = request.form["username"]
         email = request.form["email"] 
         password = request.form["password"]
-        phno = request.form["phno"]
 
         return redirect(url_for("index"))
     elif request.method == "GET":
