@@ -1,15 +1,25 @@
-<form action="/register" method="post">
-    <div class="container">
+<!DOCTYPE html>
+<html lang="en">
+{% include "header.html" %}
+<body>
+{% include "navbar.html" %}
+
+<div class="outercontainer">
+<form action="/login" method="post">
         <div class="innercontainer">
-            <label for="email"><b>Email</b></label>
-            <input type="text" placeholder="Enter email" name="email" required="true">
+            <label for="email"><b>Email</b></label><br>
+            <input type="email" placeholder="Enter email" name="email" required="true">
         </div>
         <div class="innercontainer">
-            <label for="password"><b>Password</b></label>
+            <label for="password"><b>Password</b></label><br>
             <input type="password" placeholder="Enter password" name="password" required="true">
         </div>
         <div class=""innercontainer>
-            <button type="submit">Register</button>
+            <button type="submit">Login</button>
         </div>
-    </div>
 </form>
+</div>
+{% include "footer.html" %}
+
+</body>
+</html>

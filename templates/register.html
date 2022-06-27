@@ -1,27 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+{% include "header.html" %}
+<body>
+{% include "navbar.html" %}
+
+<div class="outercontainer">
 <form action="/register" method="post">
-    <div class="container">
-        <div class="innercontainer">
-            <label for="username"><b>Username</b></label>
-            <input type="text" placeholder="Enter Username" name="username" required="true">
-        </div>
-        <div class="innercontainer">
-            <label for="email"><b>Email</b></label>
-            <input type="text" placeholder="Enter email" name="email" required="true">
-        </div>
-        <div class="innercontainer">
-            <label for="password"><b>Password</b></label>
-            <input type="password" placeholder="Enter password" name="password" required="true">
-        </div>
-        <div class="innercontainer">
-            <label for="confirmpassword"><b>Confirm Password</b></label>
-            <input type="password" placeholder="Confirm password" name="confirmpassword" required="true">
-        </div>
-        <div class="innercontainer">
-            <label for="phno"><b>Ph No.</b></label>
-            <input type="text" placeholder="Enter phno" name="phno" required="true">
-        </div>
-        <div class=""innercontainer>
-            <button type="submit">Login</button>
-        </div>
+    <div class="innercontainer">
+        <label for="username"><b>Username</b></label>
+        <input type="text" placeholder="Enter Username" name="username" required="true">
+    </div>
+    <div class="innercontainer">
+        <label for="email"><b>Email</b></label>
+        <input type="email" placeholder="Enter email" name="email" required="true">
+    </div>
+    <div class="innercontainer">
+        <label for="password"><b>Password</b></label>
+        <input type="password" placeholder="Enter password" name="password" required="true">
+    </div>
+    <div class="innercontainer">
+        <label for="confirmpassword"><b>Confirm Password</b></label>
+        <input type="password" placeholder="Confirm password" name="confirmpassword" required="true">
+    </div>
+    <div class="innercontainer">
+        <label for="phno"><b>Ph No.</b></label>
+        <input type="text" placeholder="Enter phno" name="phno" required="true">
+    </div>
+    <div class=""innercontainer>
+        <button type="submit">Login</button>
     </div>
 </form>
+</div>
+{% include "footer.html" %}
+
