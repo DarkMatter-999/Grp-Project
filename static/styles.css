@@ -160,7 +160,8 @@ h1 {
     position: relative;
 	top: 20%;
 	width: 100%;
-    padding: 20em 0;
+    /* padding: 20em 0; */
+    margin: 25vh auto;
 	display: block;
     text-align: left;
 	transition: 0.4s;

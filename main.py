@@ -1,4 +1,5 @@
 from flask import Flask, render_template, redirect, url_for, request, session
+import hashlib
 from datetime import timedelta
 from flask_sqlalchemy import SQLAlchemy
 from utils import dbfunc
@@ -23,6 +24,8 @@ def register():
         password = request.form["password"]
         phno = request.form["phno"]
         
+        password = hashlib.sha256(password.encode('utf-8')).hexdigest()
+
         user = dbfunc.User(user, email, phno, password)
         db.session.add(user)
         db.session.commit()
@@ -39,10 +42,17 @@ def login():
     if request.method == "POST":
         email = request.form["email"] 
         password = request.form["password"]
-        
-        session.permanent = True
-        session["email"] = email
-        return redirect(url_for("user"))
+
+        user = dbfunc.User.query.filter_by(email=email).first()
+        if user == None:
+            return redirect(url_for("login"))
+
+        if user.passwd == hashlib.sha256(password.encode('utf-8')).hexdigest():
+            session.permanent = True
+            session["email"] = email
+            return redirect(url_for("user"))
+        else:
+            return redirect(url_for("login"))
     elif request.method == "GET":
         if "email" in session:
             return redirect("user")
