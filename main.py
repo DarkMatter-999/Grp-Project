@@ -14,7 +14,7 @@ db = dbfunc.get_db()
 
 @app.route("/")
 def index():
-    return render_template("index.html", title="Boost Tourism")
+    return render_template("index.html", title="Travel. Destination")
 
 @app.route("/register", methods = ['POST', 'GET'])
 def register():
@@ -70,6 +70,10 @@ def user():
         return render_template("user.html", user=user)
     else:
         return redirect(url_for("login"))
+
+@app.route("/post")
+def post():
+    return render_template("upload.html")
 
 if __name__ == "__main__":
     db.init_app(app)
