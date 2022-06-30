@@ -1,6 +1,7 @@
 from flask import Flask, render_template, redirect, url_for, request, session
 import hashlib
 from datetime import timedelta
+import datetime
 from flask_sqlalchemy import SQLAlchemy
 from utils import dbfunc
 
@@ -14,7 +15,9 @@ db = dbfunc.get_db()
 
 @app.route("/")
 def index():
-    return render_template("index.html", title="Travel. Destination")
+    posts = db.session.query(dbfunc.Data).order_by(dbfunc.Data.time.desc())
+    latest_posts = db.session.query(dbfunc.Data).order_by(dbfunc.Data.like.desc())
+    return render_template("index.html", title="Travel. Destination", posts=posts, latest_posts=latest_posts)
 
 @app.route("/register", methods = ['POST', 'GET'])
 def register():
@@ -71,9 +74,45 @@ def user():
     else:
         return redirect(url_for("login"))
 
-@app.route("/post")
+@app.route("/post", methods = ['POST', 'GET'])
 def post():
-    return render_template("upload.html")
+    if request.method == "POST":
+        title = request.form["title"]
+        content = request.form["content"]
+        time = datetime.datetime.now()
+
+        time = "-".join((str(time.day), str(time.month), str(time.year))) + " " + ":".join((str(time.hour), str(time.minute))) 
+        
+        city = "CHANGE ME"
+
+        img = "CHANGE ME"
+
+        user = session["email"]
+        user = dbfunc.User.query.filter_by(email=user).first()
+
+        data = dbfunc.Data(img, title, content, time, user._id, city)
+        db.session.add(data)
+        db.session.commit()
+
+        return redirect(url_for("index"))
+
+    elif request.method == "GET":
+        if "email" in session:
+            cities = db.session.query(dbfunc.City)
+
+            return render_template("upload.html", title="Post", cities=cities)  
+        return render_template("login.html", title="Login")
+
+@app.route("/post/<int:did>")
+def show_post(did):
+    post = db.session.query(dbfunc.Data).filter_by(_did=did).first()
+    if post != None:
+        # TODO: render post page
+        return redirect(url_for("index"))
+    else:
+        return redirect(url_for("index"))
+
+
 
 if __name__ == "__main__":
     db.init_app(app)

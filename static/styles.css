@@ -106,7 +106,6 @@ h1 {
     margin: 0 16px;
     font-weight: 600;
     text-decoration: none;
-    transition: 0.4s;
     padding: 8px 16px;
     border-radius:  99px;
     float: right;
@@ -117,6 +116,10 @@ h1 {
 .menu a.is-active:hover {
     background-color: var(--light);
     color: var(--dark);
+}
+
+.menu a.logout {
+    background-color: #ff386a;
 }
 
 .hmenu {
@@ -150,10 +153,13 @@ h1 {
 	text-decoration: none;
 }
 .hmenu a.is-active {
-    background-color: #24104f;
+    background-color: #9a2dd9;
 }
 .hmenu a:hover {
     background-color: var(--primary);
+}
+.hmenu a.logout {
+    background-color: #ff386a;
 }
 
 .outercontainer {
@@ -363,7 +369,7 @@ hr{
     }
 }
 
-@media(min-width: 768px) {
+@media(min-width: 800px) {
     .hamburger{
         display: none;
     }
@@ -462,7 +468,7 @@ header{
     padding-bottom: 40vh;
 }
 .banner-title{
-    padding-top: 5vh;
+    padding-top: 10vh;
     font-size: 3rem;
     font-family: var(--Playfair);
     line-height: 1.2;
@@ -713,9 +719,8 @@ header{
 .slide{
     width: 20%;
     transition: 2s;
-    padding-top: 10vh;
+    padding-top: 30px;
     filter: blur(2px);
-    /* filter: ; */
 }
 
 .slide img{

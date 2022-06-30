@@ -8,7 +8,7 @@ class User(db.Model):
     name = db.Column("username", db.String(100))
     email = db.Column("email", db.String(100))
     phno = db.Column("phno", db.String(100))
-    passwd = db.Column("passwd", db.String(128))
+    passwd = db.Column("passwd", db.String(256))
     data = db.relationship('Data', backref='user')
 
     def __init__(self, name, email, phno, passwd):
@@ -35,6 +35,7 @@ class Data(db.Model):
     title = db.Column("title", db.String(100))
     content = db.Column("content", db.String(250))
     time = db.Column("time", db.String(100))
+    like = db.Column("likes", db.BigInteger)
     uid = db.Column("uid", db.String(100), db.ForeignKey('user.id'))
     city = db.Column("city", db.String(100), db.ForeignKey('city.id'))
 
@@ -44,4 +45,5 @@ class Data(db.Model):
         self.content = content
         self.time = time
         self.uid = uid
-        self.city
+        self.city = city
+        self.like = 0

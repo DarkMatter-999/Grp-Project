@@ -3,10 +3,14 @@
         <div class="container">
             <h1>Travel Destination</h1>
             <div class="menu">
-                <a href="#" class="is-active">Home</a>
+                {% if "email" in session %}
+                <a href="{{ url_for('logout') }}" class="logout">Logout</a>
+                {% else %}
+                <a href="{{ url_for('login') }}">Login</a>
+                {% endif %}
+                <a href="/" class="is-active">Home</a>
                 <a href="#">About</a>
-                <!-- <a href="#">Projects</a>
-                <a href="#">contacts</a> -->
+                <a href="/post">Posts</a>
             </div>
 
             <button class="hamburger">
@@ -17,10 +21,14 @@
         </div>
     </nav>
     <nav class="hmenu" id="hmenu">
-        <a href="#" class="is-active">Home</a>
+        <a href="/" class="is-active">Home</a>
         <a href="#">About</a>
-        <!-- <a href="#">Projects</a>
-        <a href="#">contacts</a> -->
+        <a href="/post">Posts</a>
+        {% if "email" in session %}
+        <a href="{{ url_for('logout') }}" class="logout">Logout</a>
+        {% else %}
+        <a href="{{ url_for('login') }}">Login</a>
+        {% endif %}
     </nav>
 
 {% endblock %}

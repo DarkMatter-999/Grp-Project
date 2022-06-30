@@ -7,11 +7,13 @@
 <div class="">
 <div class="comment-box">
     <h2>Comments</h2>
-    <form action="#">
+    <form action="/post" method="post">
         <input type="text" name="title">
         <textarea name="content" placeholder="Type your comment..."></textarea>
         <select name="city" id="city">
-            <!-- <option value=""></option> -->
+            {% for city in cities %}
+            <option value="{{ city.city }}">city.city</option>
+            {% endfor %}
         </select>
         <button type="submit">Submit Comment</button>      
       </form>
