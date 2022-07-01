@@ -13,7 +13,7 @@ app.permanent_session_lifetime = timedelta(minutes=5)
 
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///database.db"
 
-UPLOAD_FOLDER = 'upload'
+UPLOAD_FOLDER = os.path.join('static','upload')
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 ALLOWED_EXTENSTIONS = set(["jpg" , "jpeg" , "jfif" , "pjpeg" , "pjp", "png", "svg", "webp"])
 
@@ -21,8 +21,8 @@ db = dbfunc.get_db()
 
 @app.route("/")
 def index():
-    posts = db.session.query(dbfunc.Data).order_by(dbfunc.Data.time.desc())
-    latest_posts = db.session.query(dbfunc.Data).order_by(dbfunc.Data.like.desc())
+    posts = db.session.query(dbfunc.Data).order_by(dbfunc.Data.time.desc()).all()[:6]
+    latest_posts = db.session.query(dbfunc.Data).order_by(dbfunc.Data.like.desc())[:6]
     return render_template("index.html", title="Travel. Destination", posts=posts, latest_posts=latest_posts)
 
 @app.route("/register", methods = ['POST', 'GET'])
@@ -94,7 +94,7 @@ def post():
         if 'img' not in request.files:
             return redirect(url_for("post"))
         img = request.files['img']
-        filename = dbfunc.generate_random(32) + str(img.filename).split(".")[-1]
+        filename = dbfunc.generate_random(32) + "." + str(img.filename).split(".")[-1]
         path = secure_filename(filename)
         path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
         img.save(path)
@@ -124,7 +124,13 @@ def show_post(did):
     else:
         return redirect(url_for("index"))
 
+@app.route("/like/<did>")
+def like_post(did):
+    post = db.session.query(dbfunc.Data).filter_by(_did=did).first()
+    post.like += 1
+    db.session.commit()
 
+    return redirect(url_for("index"))
 
 if __name__ == "__main__":
     db.init_app(app)

@@ -70,8 +70,10 @@
         <div class = "design-item">
           <a href = "{{ url_for('post') }}/{{ post._did }}">
           <div class = "design-img">
-            <img src="/static/tourism.jpg" alt = "">
-            <span><i class = "far fa-heart"></i> {{ post.like }}</span>
+            <img src="static/upload/{{ post.img }}" alt = "">
+            <span>
+            <i class = "far fa-heart"></i> {{ post.like }}
+            </span>
             <span>{{ post.city }}</span>
           </div>
           </a>
@@ -98,8 +100,8 @@
         <!-- item -->
         <div class = "blog-item">
           <div class = "blog-img">
-            <a href="{{ url_for('post') }}/{{ latest._did }}"">
-            <img src = "/static/tourism.jpg" alt = "">
+            <a href="{{ url_for('post',did=latest._did) }}"">
+            <img src = "static/upload/{{ latest.img }}" alt = "">
             </a>
             <span><i class = "far fa-heart"> {{ latest.like }}</i></span>
           </div>
@@ -107,7 +109,7 @@
             <span>{{ latest.time }}</span>
             <h2>{{ latest.title }}g</h2>
             <p> {{ latest.content[0:50] }}...</p>
-            <a href = "{{ url_for('post') }}/{{ latest._did }}">Read More</a>
+            <a href = "{{ url_for('post',did=latest._did) }}">Read More</a>
           </div>
         </div>
         <!-- end of item -->
@@ -151,7 +153,7 @@
       if(counter > 4){
           counter = 1;
       }
-  },2000);
+  },5000);
  </script>
 
 {% include "footer.html" %}

@@ -552,6 +552,7 @@ header{
 .design-img{
     position: relative;
     overflow: hidden;
+    height: 30vh;
 }
 .design-img::after{
     position: absolute;
@@ -564,6 +565,15 @@ header{
 }
 .design-img img{
     transition:  all 0.5s ease;
+}
+.design-img a {
+    position: absolute;
+    z-index: 1;
+    top: 10px;
+    left: 10px;
+    background: var(--exDark1);
+    color: #fff;
+    padding: 0.25rem 1rem;
 }
 .design-item:hover img{
     transform: scale(1.2);
@@ -619,6 +629,10 @@ header{
     color: #fff;
     font-size: 1.4rem;
     padding: 0.3rem 0.6rem;
+}
+.blog-img a img {
+    width: auto;
+    height: 30vh;
 }
 .blog-text{
     margin: 2.2rem 0;
@@ -731,7 +745,7 @@ header{
 
 .slide{
     width: 20%;
-    transition: 2s;
+    transition: 1s;
     padding-top: 30px;
     filter: blur(2px);
 }
@@ -780,7 +794,7 @@ header{
     border: 2px solid #40D3DC;
     padding: 5px;
     border-radius: 10px;
-    transition: 1s;
+    transition: 2s;
 }
 
 .navigation-auto div:not(:last-child){
