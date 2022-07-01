@@ -6,6 +6,11 @@
 
 <div class="outercontainer">
 <form action="/register" method="post">
+    {% if error %}
+    <div class="error">
+        {{ error }}
+    </div>
+    {% endif %}
     <div class="innercontainer">
         <label for="username"><b>Username</b></label>
         <input type="text" placeholder="Enter Username" name="username" required="true">
@@ -28,6 +33,8 @@
     </div>
     <div class=""innercontainer>
         <button type="submit">Register</button>
+        or
+        <a href="/login">Login</a>
     </div>
 </form>
 </div>

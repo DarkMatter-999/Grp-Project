@@ -3,6 +3,11 @@ from utils.db import db
 def get_db():
     return db
 
+def generate_random(length):
+    letters = string.ascii_lowercase + string.ascii_uppercase + string.digits
+    result_str = ''.join(random.choice(letters) for i in range(length))
+    return result_str
+    
 class User(db.Model):
     _id = db.Column("id", db.Integer, primary_key=True)
     name = db.Column("username", db.String(100))

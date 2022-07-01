@@ -4,12 +4,18 @@ from datetime import timedelta
 import datetime
 from flask_sqlalchemy import SQLAlchemy
 from utils import dbfunc
+from werkzeug.utils import secure_filename
+import os
 
 app = Flask(__name__)
 app.secret_key = "plzzzworrkkk"
 app.permanent_session_lifetime = timedelta(minutes=5)
 
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///database.db"
+
+UPLOAD_FOLDER = './upload'
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+ALLOWED_EXTENSTIONS = set(["jpg" , "jpeg" , "jfif" , "pjpeg" , "pjp", "png", "svg", "webp"])
 
 db = dbfunc.get_db()
 
@@ -44,18 +50,18 @@ def register():
 def login():
     if request.method == "POST":
         email = request.form["email"] 
-        password = request.form["password"]
+        password = request.form["password"] 
 
         user = dbfunc.User.query.filter_by(email=email).first()
         if user == None:
-            return redirect(url_for("login"))
+            return render_template("login.html", title="Login", error="User not found")
 
         if user.passwd == hashlib.sha256(password.encode('utf-8')).hexdigest():
             session.permanent = True
             session["email"] = email
             return redirect(url_for("user"))
         else:
-            return redirect(url_for("login"))
+            return render_template("register.html", title="Login", error="Email or password incorrect")
     elif request.method == "GET":
         if "email" in session:
             return redirect("user")
@@ -85,12 +91,17 @@ def post():
         
         city = "CHANGE ME"
 
-        img = "CHANGE ME"
+        if 'file' not in request.files:
+            return redirect(url_for("post"))
+        img = request.files['file']
+        filename = dbfunc.generate_random(32) + img.filename.split["."][-1]
+        path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+        img.save(path)
 
         user = session["email"]
         user = dbfunc.User.query.filter_by(email=user).first()
 
-        data = dbfunc.Data(img, title, content, time, user._id, city)
+        data = dbfunc.Data(filename, title, content, time, user._id, city)
         db.session.add(data)
         db.session.commit()
 

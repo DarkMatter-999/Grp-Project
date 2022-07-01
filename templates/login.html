@@ -6,6 +6,11 @@
 
 <div class="outercontainer">
 <form action="/login" method="post">
+        {% if error %}
+        <div class="error">
+            {{ error }}
+        </div>
+        {% endif %}
         <div class="innercontainer">
             <label for="email"><b>Email</b></label><br>
             <input type="email" placeholder="Enter email" name="email" required="true">
@@ -16,6 +21,8 @@
         </div>
         <div class=""innercontainer>
             <button type="submit">Login</button>
+            or
+            <a href="/register">Register</a>
         </div>
 </form>
 </div>

@@ -199,6 +199,18 @@ h1 {
     margin-left: 10px;
 }
 
+.outercontainer a {
+    color: #FFF;
+    margin-top: 10px;
+    margin-left: 10px;
+}
+
+.error {
+    border: #ff386a solid 1px;
+    border-radius: 15px;
+    color: #ff386a;
+    padding: 10px;
+}
 .innercontainer input {
     padding: 10px;
     outline: none;
