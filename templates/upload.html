@@ -7,7 +7,7 @@
 <div class="">
 <div class="comment-box">
     <h2>Comments</h2>
-    <form action="/post" method="post">
+    <form action="/post" method="post" enctype="multipart/form-data">
         <div class="image-container">
             <div class="wrapper">
                <div class="image">
@@ -29,8 +29,10 @@
                </div>
             </div>
             <input id="default-btn" type="file" name="img" hidden>
+            <a href="javascript:defaultBtnActive()" class="custom-btn">Choose a File</a>
+
          </div>
-        <button onclick="defaultBtnActive()" id="custom-btn">Choose a file</button>
+        <!-- <button onclick="defaultBtnActive()" id="custom-btn">Choose a file</button> -->
         <input type="text" name="title">
         <textarea name="content" placeholder="Type your comment..."></textarea>
         <select name="city" id="city">
@@ -46,12 +48,13 @@
     const wrapper = document.querySelector(".wrapper");
     const fileName = document.querySelector(".file-name");
     const defaultBtn = document.querySelector("#default-btn");
-    const customBtn = document.querySelector("#custom-btn");
+   //  const customBtn = document.querySelector("#custom-btn");
     const cancelBtn = document.querySelector("#cancel-btn i");
     const img = document.querySelector("img");
     img.classList.add("noimage");  
     let regExp = /[0-9a-zA-Z\^\&\'\@\{\}\[\]\,\$\=\!\-\#\(\)\.\%\+\~\_ ]+$/;
     function defaultBtnActive(){
+      const defaultBtn = document.querySelector("#default-btn");
       defaultBtn.click();
     }
     defaultBtn.addEventListener("change", function(){

@@ -13,7 +13,7 @@ app.permanent_session_lifetime = timedelta(minutes=5)
 
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///database.db"
 
-UPLOAD_FOLDER = './upload'
+UPLOAD_FOLDER = 'upload'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 ALLOWED_EXTENSTIONS = set(["jpg" , "jpeg" , "jfif" , "pjpeg" , "pjp", "png", "svg", "webp"])
 
@@ -91,10 +91,11 @@ def post():
         
         city = "CHANGE ME"
 
-        if 'file' not in request.files:
+        if 'img' not in request.files:
             return redirect(url_for("post"))
-        img = request.files['file']
-        filename = dbfunc.generate_random(32) + img.filename.split["."][-1]
+        img = request.files['img']
+        filename = dbfunc.generate_random(32) + str(img.filename).split(".")[-1]
+        path = secure_filename(filename)
         path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
         img.save(path)
 

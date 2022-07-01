@@ -2,3 +2,4 @@ database.db
 env.txt
 test
 utils/__pycache__/
+upload/

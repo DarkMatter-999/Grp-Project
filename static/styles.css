@@ -898,7 +898,7 @@ header{
   text-align: center;
 } */
 .image-container{
-  height: 350px;
+  height: 375px;
   width: 100%;
   position: relative;
 }
@@ -970,19 +970,21 @@ header{
 .wrapper.active:hover .file-name{
   display: block;
 }
-.image-container #custom-btn{
+.image-container .custom-btn{
   margin: 15px 0;
   display: block;
-  /* width: 100%; */
+  width: 200px;
+  text-align: center;
+  padding: 10px;
   /* height: 50px; */
   border: none;
   outline: none;
+  text-decoration: none;
   border-radius: 5px;
   color: #fff;
   font-size: 18px;
   font-weight: 500;
   letter-spacing: 1px;
-  text-transform: uppercase;
   cursor: pointer;
   background: linear-gradient(135deg,#3a8ffe 0%,#9658fe 100%);
 }
