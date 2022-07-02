@@ -5,7 +5,47 @@
 {% include "navbar.html" %}
 
 <div class="outercontainer">
-{{ user }}
+    <div class="dashboard">
+        <div class="icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" role="presentation">
+            <path d="M7,10H9A1,1,0,0,0,9,8H7a1,1,0,0,0,0,2ZM21,4H13V3a1,1,0,0,0-2,0V4H3A1,1,0,0,0,2,5V15a3,3,0,0,0,3,3H9.59l-2.3,2.29a1,1,0,0,0,0,1.42,1,1,0,0,0,1.42,0L11,19.41V21a1,1,0,0,0,2,0V19.41l2.29,2.3a1,1,0,0,0,1.42,0,1,1,0,0,0,0-1.42L14.41,18H19a3,3,0,0,0,3-3V5A1,1,0,0,0,21,4ZM20,15a1,1,0,0,1-1,1H5a1,1,0,0,1-1-1V6H20ZM7,14h6a1,1,0,0,0,0-2H7a1,1,0,0,0,0,2Z"></path>
+        </svg>
+        <div class="username">{{ user.name }}</div>
+        <div class="icon2">
+            <svg enable-background="new 0 0 515.555 515.555" viewBox="0 0 515.555 515.555" width="512" xmlns="http://www.w3.org/2000/svg">
+                <path d="m303.347 18.875c25.167 25.167 25.167 65.971 0 91.138s-65.971 25.167-91.138 0-25.167-65.971 0-91.138c25.166-25.167 65.97-25.167 91.138 0"></path>
+                <path d="m303.347 212.209c25.167 25.167 25.167 65.971 0 91.138s-65.971 25.167-91.138 0-25.167-65.971 0-91.138c25.166-25.167 65.97-25.167 91.138 0"></path>
+                <path d="m303.347 405.541c25.167 25.167 25.167 65.971 0 91.138s-65.971 25.167-91.138 0-25.167-65.971 0-91.138c25.166-25.167 65.97-25.167 91.138 0"></path>
+              </svg>
+        </div>
+        </div>
+        <div class="details">
+            <div>Email: </div><div class="data">{{ user.email }}</div>
+            <div>Username: </div><div class="data">{{ user.name }} </div>
+        </div>
+    </div>
+    <div class="toppad"></div>
+    <div class="posts">
+        <div class="header">
+            <h3>Posts</h3>
+            <a href="{{ url_for('post') }}"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" role="presentation">
+                <path d="M19,11H13V5a1,1,0,0,0-2,0v6H5a1,1,0,0,0,0,2h6v6a1,1,0,0,0,2,0V13h6a1,1,0,0,0,0-2Z"></path>
+              </svg></a>
+        </div>
+        <ul>
+        {% for post in posts %}
+        <li>
+            <a href="{{ url_for('post') }}/{{ post._did }}">
+            <div class="post">
+                <h3>{{ post.title }}</h3>
+                <p>{{ post.content[:20] }}</p>
+            </div>
+            </a>
+        </li>
+        {% endfor %}
+    </ul>
+    </div>
+
 </div>
 {% include "footer.html" %}
 

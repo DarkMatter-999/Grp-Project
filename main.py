@@ -76,7 +76,10 @@ def logout():
 def user():
     if "email" in session:
         user = session["email"]
-        return render_template("user.html", user=user)
+        user = dbfunc.User.query.filter_by(email=user).first()
+
+        posts = dbfunc.Data.query.filter_by(uid=user._id).all()
+        return render_template("user.html", user=user, posts=posts)
     else:
         return redirect(url_for("login"))
 
