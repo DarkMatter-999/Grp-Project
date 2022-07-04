@@ -1118,3 +1118,49 @@ header{
  .posts .post {
     padding: 10px;
  }
+
+.postcontainer {
+    position: relative;
+    width: 100%;
+    margin: 15vh auto;
+    display: block;
+    text-align: left;
+}
+.post {
+    background-color: #FFF;
+    margin: auto;
+    padding: 0;
+    width: 80%;
+    height: 60%;
+    border-radius: 5px;
+    border: var(--blue-violet) solid 1px;
+}
+
+.post a {
+    text-decoration: none;
+}
+.post i {
+    padding: 10px;
+}
+.post h2 {
+    padding: 5px;
+}
+
+.post p {
+    padding: 10px;
+}
+.fa-share-alt {
+    float: right;
+}
+
+@media screen and (max-width: 786px){
+    .post{
+        width: 100%;
+    }
+}
+
+@media screen and (min-width: 1200px){
+    .post{
+        width: 60%;
+    }
+}

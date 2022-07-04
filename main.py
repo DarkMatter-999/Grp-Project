@@ -98,7 +98,7 @@ def post():
             return redirect(url_for("post"))
         img = request.files['img']
         filename = dbfunc.generate_random(32) + "." + str(img.filename).split(".")[-1]
-        path = secure_filename(filename)
+        # path = secure_filename(filename)
         path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
         img.save(path)
 
@@ -122,8 +122,8 @@ def post():
 def show_post(did):
     post = db.session.query(dbfunc.Data).filter_by(_did=did).first()
     if post != None:
-        # TODO: render post page
-        return redirect(url_for("index"))
+        user = dbfunc.User.query.filter_by(_id=post.uid).first()
+        return render_template("post.html", post=post, username=user.name)
     else:
         return redirect(url_for("index"))
 
@@ -133,7 +133,7 @@ def like_post(did):
     post.like += 1
     db.session.commit()
 
-    return redirect(url_for("index"))
+    return redirect(url_for('post')+"/"+str(did))
 
 if __name__ == "__main__":
     db.init_app(app)

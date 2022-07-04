@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+{% include "header.html" %}
+<body>
+{% include "navbar.html" %}
+<div class="postcontainer">
+    <div class="post">
+        <h2>{{ username }}</h2>
+        <img src="/static/upload/{{ post.img }}">
+        <span>
+            <a href="{{ url_for('like_post',did=post._did) }}">
+            <i class="far fa-heart"></i>
+            {{ post.like }}
+            </a>
+            <!-- <span class="spacer"></span> -->
+            <i class="fa fa-share-alt"></i>
+            <p> {{ post.content }}</p>
+        </span>
+    </div>
+</div>
+{% include "footer.html" %}
+
+</body>
+</html>
