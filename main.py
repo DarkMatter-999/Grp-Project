@@ -135,6 +135,10 @@ def like_post(did):
 
     return redirect(url_for('post')+"/"+str(did))
 
+@app.route("/about")
+def about():
+    return render_template("about.html")
+
 if __name__ == "__main__":
     db.init_app(app)
     with app.app_context():
