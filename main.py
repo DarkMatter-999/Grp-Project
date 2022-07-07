@@ -17,6 +17,8 @@ UPLOAD_FOLDER = os.path.join('static','upload')
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 ALLOWED_EXTENSTIONS = set(["jpg" , "jpeg" , "jfif" , "pjpeg" , "pjp", "png", "svg", "webp"])
 
+types = ["Place", "Food", "Handicraft", "Fruit", "Landscape", "Event"]
+
 db = dbfunc.get_db()
 
 @app.route("/")
@@ -92,7 +94,9 @@ def post():
 
         time = "-".join((str(time.day), str(time.month), str(time.year))) + " " + ":".join((str(time.hour), str(time.minute))) 
         
-        city = "CHANGE ME"
+        city = request.form["city"]
+
+        type_ = request.form["type"]
 
         if 'img' not in request.files:
             return redirect(url_for("post"))
@@ -113,9 +117,7 @@ def post():
 
     elif request.method == "GET":
         if "email" in session:
-            cities = db.session.query(dbfunc.City)
-
-            return render_template("upload.html", title="Post", cities=cities)  
+            return render_template("upload.html", title="Post", types=types)  
         return render_template("login.html", title="Login")
 
 @app.route("/post/<int:did>")

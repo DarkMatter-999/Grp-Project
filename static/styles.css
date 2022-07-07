@@ -889,8 +889,9 @@ header{
     outline: 0;
 }
 .comment-box button{
-    float: right ;
+    /* float: right ; */
     border: 0;
+    right: 10%;
     padding: 10px 30px;
     background: linear-gradient(135deg,#3a8ffe 0%,#9658fe 100%);
     font-size: 18px;
@@ -907,6 +908,25 @@ header{
     background-color: var(--dark1);
     border-radius: 15px;
     border: solid #9a2dd9 1px;
+    margin-right: 60%;
+}
+
+.comment-box .city {
+    width: 300px;
+    margin-right: 100%;
+}
+.comment-box .address {
+    width: 300px;
+}
+
+@media screen and (max-width: 786px){
+    .comment-box .address {
+        width: 100%;
+    }
+    .comment-box select {
+        margin-bottom: 10px;
+        width: 50%;
+    }
 }
 
 /* html,body{

@@ -35,9 +35,11 @@
         <!-- <button onclick="defaultBtnActive()" id="custom-btn">Choose a file</button> -->
         <input type="text" name="title">
         <textarea name="content" placeholder="Type your comment..."></textarea>
-        <select name="city" id="city">
-            {% for city in cities %}
-            <option value="{{ city.city }}">city.city</option>
+        <textarea class="address" name="address" placeholder="Type the address..."></textarea>
+        <input type="text" name="city" class="city">
+        <select name="type" id="type">
+            {% for type in types %}
+            <option value="{{ type }}">{{ type }}</option>
             {% endfor %}
         </select>
         <button type="submit">Submit Comment</button>      
