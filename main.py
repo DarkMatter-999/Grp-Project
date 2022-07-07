@@ -3,7 +3,7 @@ import hashlib
 from datetime import timedelta
 import datetime
 from flask_sqlalchemy import SQLAlchemy
-from utils import dbfunc
+from utils import dbfunc, weather
 from werkzeug.utils import secure_filename
 import os
 
@@ -20,6 +20,8 @@ ALLOWED_EXTENSTIONS = set(["jpg" , "jpeg" , "jfif" , "pjpeg" , "pjp", "png", "sv
 types = ["Place", "Food", "Handicraft", "Fruit", "Landscape", "Event"]
 
 db = dbfunc.get_db()
+
+weather = weather.Weather()
 
 @app.route("/")
 def index():
@@ -88,30 +90,36 @@ def user():
 @app.route("/post", methods = ['POST', 'GET'])
 def post():
     if request.method == "POST":
-        title = request.form["title"]
-        content = request.form["content"]
-        time = datetime.datetime.now()
+        if "email" in session:
+            title = request.form["title"]
+            content = request.form["content"]
+            time = datetime.datetime.now()
 
-        time = "-".join((str(time.day), str(time.month), str(time.year))) + " " + ":".join((str(time.hour), str(time.minute))) 
-        
-        city = request.form["city"]
+            time = "-".join((str(time.day), str(time.month), str(time.year))) + " " + ":".join((str(time.hour), str(time.minute))) 
+            
+            city = request.form["city"]
+            city_weather = weather.getweather(city)
+            if not city_weather:
+                return render_template("upload.html", title="Post", types=types, error="City not found")  
 
-        type_ = request.form["type"]
+            type_ = request.form["type"]
 
-        if 'img' not in request.files:
-            return redirect(url_for("post"))
-        img = request.files['img']
-        filename = dbfunc.generate_random(32) + "." + str(img.filename).split(".")[-1]
-        # path = secure_filename(filename)
-        path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
-        img.save(path)
+            address = request.form["address"]
 
-        user = session["email"]
-        user = dbfunc.User.query.filter_by(email=user).first()
+            if 'img' not in request.files:
+                return redirect(url_for("post"))
+            img = request.files['img']
+            filename = dbfunc.generate_random(32) + "." + str(img.filename).split(".")[-1]
+            # path = secure_filename(filename)
+            path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+            img.save(path)
 
-        data = dbfunc.Data(filename, title, content, time, user._id, city)
-        db.session.add(data)
-        db.session.commit()
+            user = session["email"]
+            user = dbfunc.User.query.filter_by(email=user).first()
+
+            data = dbfunc.Data(filename, title, content, time, user._id, city, address, type_)
+            db.session.add(data)
+            db.session.commit()
 
         return redirect(url_for("index"))
 
@@ -125,7 +133,8 @@ def show_post(did):
     post = db.session.query(dbfunc.Data).filter_by(_did=did).first()
     if post != None:
         user = dbfunc.User.query.filter_by(_id=post.uid).first()
-        return render_template("post.html", post=post, username=user.name)
+        w = weather.getweather(post.city)
+        return render_template("post.html", post=post, username=user.name, weather=w)
     else:
         return redirect(url_for("index"))
 

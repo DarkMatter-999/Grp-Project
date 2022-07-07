@@ -5,7 +5,14 @@
 {% include "navbar.html" %}
 <div class="postcontainer">
     <div class="post">
-        <h2>{{ username }}</h2>
+        <h2>{{ post.title }}</h2><h3>{{ username }}</h3>
+        <div class="weather">
+        <img src="https://openweathermap.org/img/wn/{{ weather['icon'] }}@2x.png" class="weatherimg">
+        <div>
+            <p>{{ weather["weather"] }}</p>
+            <p>{{ "{:.2f}".format(weather["temp"] - 273)}} °C</p>
+        </div>
+        </div>
         <img src="/static/upload/{{ post.img }}">
         <span>
             <a href="{{ url_for('like_post',did=post._did) }}">
@@ -15,6 +22,8 @@
             <!-- <span class="spacer"></span> -->
             <i class="fa fa-share-alt"></i>
             <p> {{ post.content }}</p>
+            <p><b>{{ post.address }}</b></p>
+            
         </span>
     </div>
 </div>

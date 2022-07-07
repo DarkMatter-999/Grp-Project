@@ -1156,14 +1156,51 @@ header{
     border: var(--blue-violet) solid 1px;
 }
 
+.post .weather {
+    position: relative;
+}
+
+.post .weatherimg {
+    position: absolute;
+    width: auto;
+    right: 0;
+    z-index: 98;
+}
+
+.weather div {
+    position: absolute;
+    z-index: 98;
+    right: 0;
+    padding-top: 80px;
+    text-align: right;
+    color: #fff;
+    text-shadow: 0 0 2px #000,
+    0 0 4px #000,
+    0 0 6px #000,
+    0 0 10px #000,
+    0 0 45px #000,
+    0 0 55px #000,
+    0 0 70px #000,
+    0 0 80px #000;
+}
+
+.weather img {
+    filter: drop-shadow(0 0 5px rgba(0, 0, 0, 1));
+}
+
 .post a {
     text-decoration: none;
 }
 .post i {
     padding: 10px;
 }
-.post h2 {
+.post h2 ,h3 {
+    position: relative;
+    display: inline;
     padding: 5px;
+}
+.post h3 {
+    float: right;
 }
 
 .post p {

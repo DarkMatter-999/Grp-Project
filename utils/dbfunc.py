@@ -24,33 +24,25 @@ class User(db.Model):
         self.phno = phno
         self.passwd = passwd
 
-class City(db.Model):
-    _id = db.Column("id", db.Integer, primary_key=True)
-    city = db.Column("city", db.String(100))
-    address = db.Column("address", db.String(100))
-    type_ = db.Column("type_", db.String(100))
-    data = db.relationship('Data')
-
-    def __init__(self, city, address, type_):
-        self.city = city
-        self.address = address
-        self.type_ = type_
-
 class Data(db.Model):
     _did = db.Column("did", db.Integer, primary_key=True)
     img = db.Column("img", db.String(100))
     title = db.Column("title", db.String(100))
     content = db.Column("content", db.String(250))
     time = db.Column("time", db.String(100))
+    address = db.Column("address", db.String(100))
+    city = db.Column("city", db.String(100))
+    type_ = db.Column("type_", db.String(100))
     like = db.Column("likes", db.BigInteger)
     uid = db.Column("uid", db.String(100), db.ForeignKey('user.id'))
-    city = db.Column("city", db.String(100), db.ForeignKey('city.id'))
 
-    def __init__(self, img, title, content, time, uid, city):
+    def __init__(self, img, title, content, time, uid, city, address, type_):
         self.img = img
         self.title = title
         self.content = content
         self.time = time
         self.uid = uid
         self.city = city
+        self.address = address
+        self.type_ = type_
         self.like = 0
