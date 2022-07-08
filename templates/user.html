@@ -37,6 +37,8 @@
         <li>
             <a href="{{ url_for('post') }}/{{ post._did }}">
             <div class="post">
+                <img src="static/upload/{{ post.img }}" alt = "">
+
                 <h3>{{ post.title }}</h3>
                 <p>{{ post.content[:20] }}</p>
             </div>

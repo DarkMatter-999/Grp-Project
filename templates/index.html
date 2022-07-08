@@ -100,7 +100,7 @@
         <!-- item -->
         <div class = "blog-item">
           <div class = "blog-img">
-            <a href="{{ url_for('post',did=latest._did) }}"">
+            <a href = "{{ url_for('post') }}/{{ latest._did }}">
             <img src = "static/upload/{{ latest.img }}" alt = "">
             </a>
             <span><i class = "far fa-heart"> {{ latest.like }}</i></span>
@@ -109,7 +109,7 @@
             <span>{{ latest.time }}</span>
             <h2>{{ latest.title }}g</h2>
             <p> {{ latest.content[0:50] }}...</p>
-            <a href = "{{ url_for('post',did=latest._did) }}">Read More</a>
+            <a href = "{{ url_for('post') }}/{{ latest._did }}">Read More</a>
           </div>
         </div>
         <!-- end of item -->

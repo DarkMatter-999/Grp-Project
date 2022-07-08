@@ -11,6 +11,8 @@
         {{ error }}
     </div>
     {% endif %}
+    <div class="error passwordmatch">
+    </div>
     <div class="innercontainer">
         <label for="username"><b>Username</b></label>
         <input type="text" placeholder="Enter Username" name="username" required="true">
@@ -21,18 +23,18 @@
     </div>
     <div class="innercontainer">
         <label for="password"><b>Password</b></label>
-        <input type="password" placeholder="Enter password" name="password" required="true">
+        <input type="password" placeholder="Enter password" name="password" required="true" id="passwd">
     </div>
     <div class="innercontainer">
         <label for="confirmpassword"><b>Confirm Password</b></label>
-        <input type="password" placeholder="Confirm password" name="confirmpassword" required="true">
+        <input type="password" placeholder="Confirm password" name="confirmpassword" required="true" id="confirmpasswd">
     </div>
     <div class="innercontainer">
         <label for="phno"><b>Ph No.</b></label>
         <input type="text" placeholder="Enter phno" name="phno" required="true">
     </div>
-    <div class=""innercontainer>
-        <button type="submit">Register</button>
+    <div class="innercontainer">
+        <button type="submit" id="submit">Register</button>
         or
         <a href="/login">Login</a>
     </div>
@@ -40,3 +42,22 @@
 </div>
 {% include "footer.html" %}
 
+<script>
+    let password = document.getElementById("passwd");
+    let confirm = document.getElementById("confirmpasswd");
+
+    confirm.oninput = checkpassword;
+
+    function checkpassword() {
+        let error = document.getElementsByClassName("passwordmatch")[0];
+        if(password.value != confirm.value) {
+            error.innerHTML = "passwords dont match";
+            document.getElementById("submit").disabled = true;
+        } else {
+            error.innerHTML = "";
+            document.getElementById("submit").disabled = false;
+        }
+    }
+</script>
+</body>
+</html>

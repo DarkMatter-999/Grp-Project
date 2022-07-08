@@ -6,6 +6,7 @@ from flask_sqlalchemy import SQLAlchemy
 from utils import dbfunc, weather
 from werkzeug.utils import secure_filename
 import os
+import json
 
 app = Flask(__name__)
 app.secret_key = "plzzzworrkkk"
@@ -21,7 +22,7 @@ types = ["Place", "Food", "Handicraft", "Fruit", "Landscape", "Event"]
 
 db = dbfunc.get_db()
 
-weather = weather.Weather()
+wea = weather.Weather()
 
 @app.route("/")
 def index():
@@ -98,7 +99,7 @@ def post():
             time = "-".join((str(time.day), str(time.month), str(time.year))) + " " + ":".join((str(time.hour), str(time.minute))) 
             
             city = request.form["city"]
-            city_weather = weather.getweather(city)
+            city_weather = wea.getweather(city)
             if not city_weather:
                 return render_template("upload.html", title="Post", types=types, error="City not found")  
 
@@ -133,8 +134,7 @@ def show_post(did):
     post = db.session.query(dbfunc.Data).filter_by(_did=did).first()
     if post != None:
         user = dbfunc.User.query.filter_by(_id=post.uid).first()
-        w = weather.getweather(post.city)
-        return render_template("post.html", post=post, username=user.name, weather=w)
+        return render_template("post.html", post=post, username=user.name)
     else:
         return redirect(url_for("index"))
 
@@ -149,6 +149,14 @@ def like_post(did):
 @app.route("/about")
 def about():
     return render_template("about.html")
+
+@app.route("/weather")
+def weather():
+    city = request.args.get('city')
+    w = wea.getweather(city)
+
+    return w
+
 
 if __name__ == "__main__":
     db.init_app(app)

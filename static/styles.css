@@ -1194,7 +1194,7 @@ header{
 .post i {
     padding: 10px;
 }
-.post h2 ,h3 {
+.post h2 , .post h3 {
     position: relative;
     display: inline;
     padding: 5px;

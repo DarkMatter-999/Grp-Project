@@ -6,12 +6,14 @@
 <div class="postcontainer">
     <div class="post">
         <h2>{{ post.title }}</h2><h3>{{ username }}</h3>
-        <div class="weather">
-        <img src="https://openweathermap.org/img/wn/{{ weather['icon'] }}@2x.png" class="weatherimg">
+        <div class="weather-container">
+        <!-- <div class="weather">
+        <img src="https://openweathermap.org/img/wn/ weather['icon'] @2x.png" class="weatherimg">
         <div>
-            <p>{{ weather["weather"] }}</p>
-            <p>{{ "{:.2f}".format(weather["temp"] - 273)}} °C</p>
+            <p> weather["weather"] </p>
+            <p> "{:.2f}".format(weather["temp"] - 273) °C</p>
         </div>
+        </div> -->
         </div>
         <img src="/static/upload/{{ post.img }}">
         <span>
@@ -29,5 +31,27 @@
 </div>
 {% include "footer.html" %}
 
+<script>
+    async function reqWeather() {
+        let response = await fetch('http://localhost:5000/weather?city={{ post.city }}');
+        return await response.json();
+    }
+
+    async function updateWeather() {
+        let data = await reqWeather();
+
+        let weather = document.getElementsByClassName("weather-container")[0];
+
+        weather.innerHTML = `<div class="weather">
+            <img src="https://openweathermap.org/img/wn/${data['icon']}@2x.png" class="weatherimg">
+            <div>
+                <p>${data["weather"]}</p>
+                <p>${Math.round(data["temp"] - 273).toFixed(2)} °C</p>
+            </div>
+            </div>`;
+    }
+
+    updateWeather();
+</script>
 </body>
 </html>

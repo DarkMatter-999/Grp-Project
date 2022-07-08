@@ -15,7 +15,7 @@ class Weather:
     def getweather(self, city):
 
         city = city.lower()
-        print(self.city_cache)
+        # print(self.city_cache)
 
         if city not in self.city_cache.keys():
             return self.getweather_notime(city)
@@ -42,7 +42,8 @@ class Weather:
         if data["cod"] == "404":
             return False
 
-        impdata = {"weather": data['weather'][0]['main'], "icon" :data['weather'][0]['icon'], "temp": data['main']['feels_like'], "time": time.time()}
+        # print(data)
+        impdata = {"weather": data['weather'][0]['main'], "icon" :data['weather'][0]['icon'], "temp": data['main']['temp'], "time": time.time()}
 
         self.city_cache[city.lower()] = impdata
 

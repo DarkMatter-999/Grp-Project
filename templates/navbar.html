@@ -5,6 +5,7 @@
             <div class="menu">
                 {% if "email" in session %}
                 <a href="{{ url_for('logout') }}" class="logout">Logout</a>
+                <a href="/user"><i class="fa fa-user logout" aria-hidden="true"></i></a>
                 {% else %}
                 <a href="{{ url_for('login') }}">Login</a>
                 {% endif %}
@@ -25,6 +26,7 @@
         <a href="#">About</a>
         <a href="/post">Posts</a>
         {% if "email" in session %}
+        <a href="/user"><i class="fa fa-user logout" aria-hidden="true"></i></a>
         <a href="{{ url_for('logout') }}" class="logout">Logout</a>
         {% else %}
         <a href="{{ url_for('login') }}">Login</a>
