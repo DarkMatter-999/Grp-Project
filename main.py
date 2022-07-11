@@ -7,6 +7,7 @@ from utils import dbfunc, weather
 from werkzeug.utils import secure_filename
 import os
 import json
+import random
 
 app = Flask(__name__)
 app.secret_key = "plzzzworrkkk"
@@ -28,7 +29,11 @@ wea = weather.Weather()
 def index():
     posts = db.session.query(dbfunc.Data).order_by(dbfunc.Data.time.desc()).all()[:6]
     latest_posts = db.session.query(dbfunc.Data).order_by(dbfunc.Data.like.desc())[:6]
-    return render_template("index.html", title="Travel. Destination", posts=posts, latest_posts=latest_posts)
+    images = os.listdir("./static/upload")
+    images = [i for i in images if i.split(".")[-1] in list(ALLOWED_EXTENSTIONS)]
+    images = random.sample(images, k=( len(images) if len(images) < 4 else 4))
+    print(images)
+    return render_template("index.html", title="Travel. Destination", posts=posts, latest_posts=latest_posts, images=images)
 
 @app.route("/register", methods = ['POST', 'GET'])
 def register():

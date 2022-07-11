@@ -22,7 +22,8 @@
             {{ post.like }}
             </a>
             <!-- <span class="spacer"></span> -->
-            <i class="fa fa-share-alt"></i>
+            <i class="fa fa-share-alt" onclick="copyLink()">
+            </i>
             <p> {{ post.content }}</p>
             <p><b>{{ post.address }}</b></p>
             
@@ -32,6 +33,13 @@
 {% include "footer.html" %}
 
 <script>
+    function copyLink() {
+        var copyText = document.location.href;
+
+        navigator.clipboard.writeText(copyText);
+
+        alert("Copied the text: " + copyText);
+    }
     async function reqWeather() {
         let response = await fetch('http://localhost:5000/weather?city={{ post.city }}');
         return await response.json();
