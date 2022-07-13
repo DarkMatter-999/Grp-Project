@@ -32,7 +32,7 @@ def index():
     images = os.listdir("./static/upload")
     images = [i for i in images if i.split(".")[-1] in list(ALLOWED_EXTENSTIONS)]
     images = random.sample(images, k=( len(images) if len(images) < 4 else 4))
-    print(images)
+    # print(images)
     return render_template("index.html", title="Travel. Destination", posts=posts, latest_posts=latest_posts, images=images)
 
 @app.route("/register", methods = ['POST', 'GET'])
@@ -162,6 +162,26 @@ def weather():
 
     return w
 
+@app.route("/search")
+def search():
+    city = request.args.get("city").lower()
+    
+    images = os.listdir("./static/upload")
+    images = [i for i in images if i.split(".")[-1] in list(ALLOWED_EXTENSTIONS)]
+    images = random.sample(images, k=( len(images) if len(images) < 4 else 4))
+
+
+    posts = db.session.query(dbfunc.Data).all()
+    print(posts)
+    post = []
+    
+    for p in posts:
+        if city in p.city.lower() or city in p.content.lower() or city in p.title.lower() or city in p.address.lower():
+            post.append(p)
+            continue
+
+    return render_template("search.html", posts=post, images=images)
+    
 
 if __name__ == "__main__":
     db.init_app(app)

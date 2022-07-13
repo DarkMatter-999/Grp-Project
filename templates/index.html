@@ -44,8 +44,8 @@
         <span>Travel.</span> Destination
     </h1>
     <p>everything that you want to know about travel places</p>
-    <form>
-        <input class = "search-input" placeholder="find your destination . . .">
+    <form action="/search">
+        <input class = "search-input" placeholder="find your destination . . ." name="city">
         <button type = "submit" class = "search-btn">
         <i class = "fas fa-search"></i>
         </button>
@@ -136,11 +136,9 @@
   </section>
   <!-- end of about -->
 <div class="image-grid">
-    <img src="/static/tourism.jpg" alt="tourism">
-    <img src="/static/tourism.jpg" alt="tourism">
-    <img class="image-grid-col-2 image-grid-row-2" src="/static/tourism.jpg" alt="tourism">
-    <img src="/static/tourism.jpg" alt="tourism">
-    <img src="/static/tourism.jpg" alt="tourism">
+  {% for image in images %}
+    <img src={{ "/static/upload/" + image }} alt="tourism">
+  {% endfor %}
 </div>
 
 <script type="text/javascript">
