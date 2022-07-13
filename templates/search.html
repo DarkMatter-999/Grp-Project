@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+{% include "header.html" %}
+<body>
+{% include "navbar.html" %}
+<div class="toppad"></div>
+<!-- header -->
+<header>
+  <!--image slider start-->
+  <div class="slider">
+    <div class="slides">
+     <!--radio buttons start-->
+     <input type="radio" name="radio-btn" id="radio1">
+     <input type="radio" name="radio-btn" id="radio2">
+     <input type="radio" name="radio-btn" id="radio3">
+     <input type="radio" name="radio-btn" id="radio4">
+     <!--radio buttons end-->
+     <!--slide images start-->
+      {% for image in images %}
+      {% if image == images[0] %}
+      <div class="slide first">
+      {% else %}
+      <div class="slide">
+      {% endif %}
+        <img src={{ "/static/upload/" + image }} alt="">
+      </div>
+    {% endfor %}
+
+     <!--slide images end-->
+     <!--automatic navigation start-->
+     <!-- <div class="navigation-auto">
+         <div classs="auto-btn1"></div>
+         <div classs="auto-btn2"></div>
+         <div classs="auto-btn3"></div>
+         <div classs="auto-btn4"></div>  
+     </div> -->
+     <!--automatic navigation end-->
+ </div>
+</div> 
+<!--image slider end-->
+    <div class = "banner">
+    <div class = "container-blog">
+    <h1 class = "banner-title">
+        <span>Travel.</span> Destination
+    </h1>
+    <p>everything that you want to know about travel places</p>
+    <form>
+        <input class = "search-input" placeholder="find your destination . . .">
+        <button type = "submit" class = "search-btn">
+        <i class = "fas fa-search"></i>
+        </button>
+    </form>
+    </div>
+    </div>
+</header>
+<!-- end of header -->
+<!-- design -->
+<section class = "design" id = "design">
+    <div class = "container-blog">
+      <div class = "title">
+        <h2>SEARCH RESULTS</h2>
+        
+      </div>
+      <div class = "design-content">
+        {% for post in posts %}
+        <!-- item -->
+        <div class = "design-item">
+          <a href = "{{ url_for('post') }}/{{ post._did }}">
+          <div class = "design-img">
+            <img src="static/upload/{{ post.img }}" alt = "">
+            <span>
+            <i class = "far fa-heart"></i> {{ post.like }}
+            </span>
+            <span>{{ post.city }}</span>
+          </div>
+          </a>
+          <div class = "design-title">
+            <a href = "{{ url_for('post') }}/{{ post._did }}">{{ post.title }}</a>
+          </div>
+        </div>
+        <!-- end of item -->
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+  {% include "footer.html" %}
+</body>
+</html>
