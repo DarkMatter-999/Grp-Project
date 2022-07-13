@@ -1229,9 +1229,7 @@ header{
     background-color: black;
 }
 .about img{
-    border-radius: 50%;
-    height: 25%;
-    width: 25%;
+    box-shadow: 0 0 8px 8px white;
     margin: auto;
 
 }
