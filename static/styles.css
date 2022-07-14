@@ -486,7 +486,7 @@ header{
     /* padding-bottom: 40vh; */
 }
 .banner-title{
-    padding-top: 10vh;
+    /* padding-top: 10vh; */
     font-size: 3rem;
     font-family: var(--Playfair);
     line-height: 1.2;
@@ -1163,7 +1163,8 @@ header{
 
 .post .weatherimg {
     position: absolute;
-    width: auto;
+    width: 100px;
+    height: auto;
     right: 0;
     z-index: 98;
 }

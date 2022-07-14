@@ -38,10 +38,10 @@
 
          </div>
         <!-- <button onclick="defaultBtnActive()" id="custom-btn">Choose a file</button> -->
-        <input type="text" name="title">
+        <input type="text" name="title" placeholder="Title">
         <textarea name="content" placeholder="Type your comment..."></textarea>
         <textarea class="address" name="address" placeholder="Type the address..."></textarea>
-        <input type="text" name="city" class="city">
+        <input type="text" name="city" class="city" placeholder="City">
         <select name="type" id="type">
             {% for type in types %}
             <option value="{{ type }}">{{ type }}</option>

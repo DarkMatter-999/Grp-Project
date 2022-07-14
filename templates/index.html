@@ -125,13 +125,13 @@
         </div>
         <div class = "about-text">
           <div class = "title">
-            <h2>FAMOUS QUOTES</h2>
-            <p>by authors</p>
+            <h2>Travelling</h2>
+            <!-- <p>by authors</p> -->
           </div>
           <p>“The world is a book and those who do not travel read only one page.” ~ Saint Augustine.</p>
-          <p> “Live with no excuses and travel with no regrets” ~ Oscar Wilde</p>
+          <p style="text-align: right;"> “Live with no excuses and travel with no regrets” ~ Oscar Wilde</p>
           <p>“If you think adventure is dangerous, try routine, it's lethal” ~ Paul Coelho</p>
-          <p>“I wish I had never gone traveling.” Said no one ever.</p>
+          <p style="text-align: right;">“I wish I had never gone traveling.” Said no one ever.</p>
         </div>
       </div>
     </div>
@@ -139,7 +139,7 @@
   <!-- end of about -->
 <div class="image-grid">
   {% for image in images %}
-    <img src={{ "/static/upload/" + image }} alt="tourism">
+    <img src={{ "/static/upload/" + image }} class="image-grid-col-2 image-grid-row-2" alt="tourism">
   {% endfor %}
 </div>
 

@@ -24,9 +24,12 @@
             <!-- <span class="spacer"></span> -->
             <i class="fa fa-share-alt" onclick="copyLink()">
             </i>
+            {% if candelete %}
+            <i class="fa fa-trash" onclick="location.href = '/delete/{{ post._did }}'">
+            </i>
+            {% endif %}
             <p> {{ post.content }}</p>
             <p><b>{{ post.address }}</b></p>
-            
         </span>
     </div>
 </div>

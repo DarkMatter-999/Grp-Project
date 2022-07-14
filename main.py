@@ -139,7 +139,7 @@ def show_post(did):
     post = db.session.query(dbfunc.Data).filter_by(_did=did).first()
     if post != None:
         user = dbfunc.User.query.filter_by(_id=post.uid).first()
-        return render_template("post.html", post=post, username=user.name)
+        return render_template("post.html", post=post, username=user.name, candelete=(session["email"]==user.email if "email" in session else False))
     else:
         return redirect(url_for("index"))
 
@@ -182,6 +182,20 @@ def search():
 
     return render_template("search.html", posts=post, images=images)
     
+@app.route("/delete/<did>")
+def delete(did):
+    if "email" in session:
+        post = db.session.query(dbfunc.Data).filter_by(_did=did).first()
+        if post != None:
+            user = db.session.query(dbfunc.User).filter_by(_id=post.uid).first()
+            if session["email"] == user.email:
+                img = post.img
+                os.remove(os.path.join(app.config['UPLOAD_FOLDER'], img))
+                db.session.delete(post)
+                db.session.commit()
+
+    return redirect(url_for("index"))
+
 
 if __name__ == "__main__":
     db.init_app(app)
