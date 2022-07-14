@@ -17,7 +17,7 @@ app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///database.db"
 
 UPLOAD_FOLDER = os.path.join('static','upload')
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
-ALLOWED_EXTENSTIONS = set(["jpg" , "jpeg" , "jfif" , "pjpeg" , "pjp", "png", "svg", "webp"])
+ALLOWED_EXTENSTIONS = set(["jpg" , "jpeg" , "jfif" , "pjpeg" , "pjp", "png", "svg", "webp", "gif"])
 
 types = ["Place", "Food", "Handicraft", "Fruit", "Landscape", "Event"]
 
@@ -32,8 +32,12 @@ def index():
     images = os.listdir("./static/upload")
     images = [i for i in images if i.split(".")[-1] in list(ALLOWED_EXTENSTIONS)]
     images = random.sample(images, k=( len(images) if len(images) < 4 else 4))
+
+    images1 = os.listdir("./static/upload")
+    images1 = [i for i in images1 if i.split(".")[-1] in list(ALLOWED_EXTENSTIONS)]
+    images1 = random.sample(images1, k=( len(images1) if len(images1) < 5 else 5))
     # print(images)
-    return render_template("index.html", title="Travel. Destination", posts=posts, latest_posts=latest_posts, images=images)
+    return render_template("index.html", title="Travel. Destination", posts=posts, latest_posts=latest_posts, images=images, images1=images1)
 
 @app.route("/register", methods = ['POST', 'GET'])
 def register():

@@ -138,8 +138,12 @@
   </section>
   <!-- end of about -->
 <div class="image-grid">
-  {% for image in images %}
+  {% for image in images1 %}
+    {% if images1.index(image) % 3 == 2 %}
     <img src={{ "/static/upload/" + image }} class="image-grid-col-2 image-grid-row-2" alt="tourism">
+    {% else %}
+    <img src={{ "/static/upload/" + image }} alt="tourism">
+    {% endif %}
   {% endfor %}
 </div>
 
